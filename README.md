@@ -1,34 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Full Stack Coding Challenge
 
-## Getting Started
+## Goal
 
-First, run the development server:
+*Use the web framework of your choice (next.js, django, flask, RoR, vue etc.) to create a web application with 2 pages that will be used by technical users to draw field boundaries.* 
+
+### Page 1
+
+A landing page that welcomes the user and provides a link to the map page.
+
+### Page 2
+
+This page should be a mapbox map where when the user can draw a polygon on the map (using mapbox draw ([https://github.com/mapbox/mapbox-gl-draw](https://github.com/mapbox/mapbox-gl-draw))). The geojson should be able to be stored with a save button. Upon saving, please send a notification that it has been successfully saved. 
+
+### API
+
+When the user saves the polygon, please build a simple API that POSTs that data, along with a timestamp, to a local json or SQLite file.
+
+### Things to think about
+
+- using a framework that you think is best for the task and one that you are comfortable with.
+- adding unit testing in your application.
+- demonstrating your sense of design by adding any elements to help the user know how to use the application.
+- writing simple, easy to understand, and well documented code
+- creating a container for the application.
+
+## Quick Start Local Guide
+
+0. Configure environment | prerequisite: mapbox account & public token (https://account.mapbox.com/)
+
 
 ```bash
-npm run dev
-# or
-yarn dev
+#.env
+#replace env variable with public mapbox token
+NEXT_PUBLIC_MAPBOX_TOKEN=<YOUR_TOKEN>
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Clean install node packages 
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+```bash
+npm ci
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+2. Build static assets 
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+npm run build
+```
 
-## Learn More
+3. Run app
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+docker-compose up --build
+# or
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. UI access
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+open http://localhost:3000/
+```
 
-## Deploy on Vercel
+5. Kill | if you are running docker locally, the following command will stop and remove containers, networks and volumes created by `up`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+docker-compose down -v
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Testing
+
+```bash
+npm run test
+```

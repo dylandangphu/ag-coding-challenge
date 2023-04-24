@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  next-app:
+    container_name: next-app
+    command: npm run dev
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      NEXT_PUBLIC_MAPBOX_TOKEN: ${NEXT_PUBLIC_MAPBOX_TOKEN}
+    volumes:
+      - ./public:/app/public
+      - ./out:/app/out
+      - ./pages:/app/pages
+      - ./components:/app/components
+      - ./styles:/app/styles
+      - ./.next:/app/.next
+    restart: always
+    ports:
+      - 3000:3000
